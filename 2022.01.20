@@ -1,0 +1,16 @@
+[C++] std::false_type, std::true_type 을 이용한 구조체 멤버 변수(V)가 있는 경우에만 동작하는 코드
+
+//define
+
+#define HAS_MEMBER(V)\
+	template<typename T, typename = void>\
+	struct has_##V : std::false_type { };\
+	\
+	template<typename T>\
+	struct has_##V<T, decltype(std::declval<T>().V, void())> : std::true_type { };
+
+
+// use
+
+	HAS_MEMBER(result)
+	HAS_MEMBER(eResult)
