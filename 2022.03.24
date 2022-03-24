@@ -1,0 +1,11 @@
+About WndDbg
+
+- dmp, pdb, exe, dll 등 필요한 file 준비
+ > 빌드때와 동일한 이름이어야 함
+- WndDbg 실행
+ > set Symbol File Path (.pdb)
+ > set Image File Path (.exe, .dll)
+ > Open Crash Dump (.dmp)
+- Input Command
+ > .ecxr
+ > k
