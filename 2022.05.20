@@ -8,18 +8,18 @@ https://github.com/rancher-sandbox/rancher-desktop/issues/1180
 - solution
 use proxy port of windows
 
-PS C:\WINDOWS\system32> netsh interface portproxy add v4tov4 listenport=38081 listenaddress=0.0.0.0 connectport=38080 connectaddress=localhost
+PS C:\WINDOWS\system32> netsh interface portproxy add v4tov4 listenport=5601 listenaddress=0.0.0.0 connectport=5601 connectaddress=localhost
 
 PS C:\WINDOWS\system32> netsh interface portproxy show all
 Écouter sur ipv4 :             Connecter à ipv4 :
 Adresse         Port        Adresse         Port
 --------------- ----------  --------------- ----------
-0.0.0.0         38081       localhost       38080
+0.0.0.0         5601       localhost       5601
 
-PS C:\WINDOWS\system32> netstat -ano | grep ':3808'
-  TCP    0.0.0.0:38081          0.0.0.0:0              LISTENING       3816
-  TCP    127.0.0.1:38080        0.0.0.0:0              LISTENING       15452
-  TCP    [::1]:38080            [::]:0                 LISTENING       15452
+PS C:\WINDOWS\system32> netstat -ano | grep ':5601'
+  TCP    0.0.0.0:5601          0.0.0.0:0              LISTENING       3816
+  TCP    127.0.0.1:5601        0.0.0.0:0              LISTENING       15452
+  TCP    [::1]:5601            [::]:0                 LISTENING       15452
 
 net stop iphlpsvc
 net start iphlpsvc
