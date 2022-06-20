@@ -1,0 +1,9 @@
+- SqlServer 스키마 자동 배포 툴 제작
+
+Microsoft.SqlServer.DacFx nuget package의 160.6161.0 에 버그가 있어 db to project 배포시 constraint가 포함되지 않았다.
+관련 소스코드를 찾던 중 preview 버전인 Microsoft.SqlTools.ServiceLayer에서는 버그가 수정된 것을 확인했다.
+그래서 해당 nuget package에서는 preview 버전의 Microsoft.SqlServer.DacFx 160.6188.0-preview를 사용한다는 것을 확인하고 해당 패키지를 사용하니 잘 됐다.
+
+버그가 있는 패키지의 소스코드를 살펴보니 프로젝트 배포시에 차이점들을 재귀로 호출해서 테이블의 하위 항목인 컬럼의 constraint도 포함되어야 하는데 그 부분이 누락된것 같다.
+
+결론 : 최신버전의 패키지를 사용할때는 버그가 있을 수도 있으니 이 부분도 염두에 두자.
