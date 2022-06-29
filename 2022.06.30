@@ -1,0 +1,6 @@
+- 클라우드(AWS) 머신의 윈도우 방화벽에서 모든 IP에 대해서 거부를 했을 경우 대처법
+
+원격으로 접속하는 포트조차 막혀있으므로 다시 복구할수 없다.
+AWS에서는 이에 대한 해결 방법을 제공하고 있다.
+아래 참고
+https://docs.amazonaws.cn/en_us/AWSEC2/latest/WindowsGuide/troubleshoot-connect-windows-instance.html
