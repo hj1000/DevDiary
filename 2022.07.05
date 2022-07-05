@@ -1,0 +1,11 @@
+- net use
+윈도우에서 네트워크 자원 연결을 관리해 주는 모듈
+
+command
+net use : 연결 정보 조회
+net use * /d /y : 모든 연결 삭제
+
+api
+WNetUseConnection
+WNetCancelConnection2A
+system error code로 결과가 반환되며, C#의 경우 Win32Exception(int errorCode)를 이용해서 에러의 내용을 확인할 수 있다.
