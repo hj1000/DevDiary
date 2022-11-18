@@ -1,4 +1,5 @@
 //wipeout workspace on jenkins pipeline groovy script
+//delete from all node machine
 
 import hudson.*
 import hudson.model.*
