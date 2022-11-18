@@ -1,0 +1,41 @@
+//wipeout workspace on jenkins pipeline groovy script
+
+import hudson.*
+import hudson.model.*
+
+jenkins = Hudson.instance
+
+for (item in jenkins.items)
+{
+    if (item.name == "[WORKSPACE_NAME]")
+    {
+        println "item = $item.name"
+        cleanup(item)
+    }
+}
+
+def cleanup (item)
+{
+    for (c in jenkins.computers)
+    {
+        node = c.node
+        println "node = $node.selfLabel.name"
+        
+        FilePath workspace = node.getWorkspaceFor(item)
+        println "workspace = $workspace"
+
+        println "list = " + workspace.list()
+
+        if (workspace.list())
+        {
+            println "===== clean up start ====="
+            println "free space old = " + workspace.getFreeDiskSpace()
+            
+            workspace.deleteContents()
+            
+            println "list now = " + workspace.list()
+            println "free space now = " + workspace.getFreeDiskSpace()
+            println "===== clean up end ====="
+        }
+    }
+}
