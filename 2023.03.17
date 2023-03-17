@@ -1,0 +1,32 @@
+Symbol Server(with source indexing) 구축 on Git
+
+- 설명
+dmp 파일이 생겼을때 자동으로 exe, pdb파일을 가져온 뒤
+pdb에 기록된 소스 위치를 찾아 visual studio에서 보여주는 시스템
+
+- 구축 방법
+1. 소스 코드 개발 후 커밋 & 푸시
+2. 바이너리 빌드
+  바이너리를 빌드해서 exe와 pdb를 생성한다.
+3. 소스 인덱싱
+  생성된 pdb파일에 해당 소스파일이 git 서버에 저장된 위치와 리비전 정보를 기록한다.
+  ex) gitindex.cmd /debug /source=D:\Project\_symboltest /symbols=D:\Project\_symboltest\x64\Release
+    기존에 git용으로 개발된 perl script에서 .git 위치를 못찾는다.
+    gitindex.cmd 가 있는 위치를 path에 등록해 두고, 해당 소스가 위치한 D:\Project\_symboltest에서 실행해야 정상 동작한다.
+    /debug /release 옵션은 소스 인덱싱 과정의 로그를 출력할 지 결정한다.
+4. 심볼 업로드
+  로컬 또는 원격에 심볼 파일(exe, pdb)을 업로드 한다.
+  ex) symstore.exe add /r /f "D:\Project\_symboltest\x64\Release\*.*" /s "\\[원격 경로 or ip]\symbol" /t "TestStory"
+    주어진 저장소에 심볼 정보를 저장한다.
+    사용할 때 해당 심볼 정보 경로를 visual studio에 설정해 줘야 한다.
+  
+- 사용 방법
+1. visual studio 옵션 설정
+  도구 -> 옵션 -> 디버깅 -> 소스 서버 지원 사용 체크 -> 소스 서버 진단 메시지를 출력 창에 표시(optional)
+2. 심볼 경로 설정
+  도구 -> 옵션 -> 디버깅 -> 기호 -> 기호 파일(.pdb) 위치 추가
+    위에서 심볼을 업로드한 위치를 입력해 준다.
+3. 디버깅 시작
+
+- 참고 자료
+https://github.com/rooflz/SourceServer-GitExtensions
